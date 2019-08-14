@@ -1,26 +1,24 @@
-"manifest_version": 2,
-"name": "TAS-CAL",
-"short_name": "Ext name",
-"version": "0.1",
-"default_locale": "ja_JP",
-"description": "I want Tasukaru.",
-"icons": {
-    "16": "icon16.png",
-    "48": "icon48.png",
-    "128": "icon128.png"
-},
-
-"content_scripts": [
-  {
-    "matches": ["https://www.youtube.com/watch?v=*"],
-    "css": ["style.css"],
-    "js": ["jquery-3.4.1.min.js", "content_script.js"]
-  }
-]
-
-"browser_action": {
-    "default_icon": {
-        "19": "icon19.png"
+{
+    "manifest_version": 2,
+    "name": "TAS-CAL",
+    "short_name": "Ext name",
+    "version": "0.1",
+    "description": "I want Tasukaru.",
+    "icons": {
+        "16": "icon16.png",
+        "48": "icon48.png",
+        "128": "icon128.png"
     },
-    "default_popup": "popup.html"
+
+    "content_scripts": [
+        {
+            "matches": ["https://www.youtube.com/watch?v=*"],
+            "css": ["style.css"],
+            "js": ["jquery-3.4.1.min.js", "content_script.js"]
+        }
+    ],
+
+    "browser_action": {
+        "default_popup": "popup.html"
+    }
 }
