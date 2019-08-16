@@ -12,7 +12,7 @@
 
     "content_scripts": [
         {
-            "matches": ["https://www.youtube.com/watch?v=*"],
+            "matches": ["https://www.youtube.com/*","https://www.pixiv.net/*"],
             "css": ["style.css"],
             "js": ["jquery-3.4.1.min.js", "content_script.js"]
         }
