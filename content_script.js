@@ -1,8 +1,16 @@
 $(function () {
     setTimeout(function () {
         console.log('start');
-        // 自要素の前に追加
-        $("h1").after("<button>これはボタンです。</button>");
+        var links = 1;
+        var name;
+        $("#description > yt-formatted-string > a").each(function(){
+            links = $(this).attr('href');
+            name = $(this).text();
+            console.log(this);
+            console.log(links);
+            console.log(name);
+            $("#info").before("<a href="+links+">"+name+"</a>");
+        });
         console.log('end');
-    }, 1000);
+    }, 2000);
 });
