@@ -2,7 +2,7 @@
     "manifest_version": 2,
     "name": "TAS-CAL",
     "short_name": "Ext name",
-    "version": "0.1",
+    "version": "1.0",
     "description": "I want Tasukaru.",
     "icons": {
         "16": "icon16.png",

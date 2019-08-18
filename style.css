@@ -4,47 +4,78 @@
 
 /*Left Menu*/
 ._2bRtL9c {
-    width: 30%;
-    padding: 30px;
+    box-sizing: border-box;
+    width: 20vw;
+    padding: 2% !important;
     height: 100%;
     position: fixed;
-    display: block;
+}
 
-    .Pz2OXOH,
-    ._35zXp-3 {
-        display: block;
-    }
+._2fc7U5Q {
+    margin-left: 0 !important;
+}
 
-    ._-59EIiw {
-        font-size: 1.4rem;
+._1pIL-dS {
+    justify-content: flex-end !important;
+}
 
-        li a {
-            line-height: 3rem;
-        }
-    }
+.Pz2OXOH,
+._35zXp-3 {
+    flex-flow: column;
+}
 
-    ._2SUJDIY {
-        margin-left: 0;
-    }
+._-59EIiw {
+    font-size: 1.4rem !important;
+}
 
-    .EzpDawq,
-    ._-59EIiw,
-    ._1hysT5B {
-        flex-direction: column;
-    }
+._-59EIiw > li > a {
+    line-height: 3rem !important;
+}
 
-    ._21w2tl_,
-    ._3r6ZD-l {
-        -webkit-flex-flow: row;
-    }
+._2SUJDIY {
+    margin-left: 0 !important;
+}
 
+.EzpDawq,
+._-59EIiw,
+._1hysT5B {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+}
 
+._21w2tl_ {
+    flex-flow: column !important;
+    margin: 20px 0 !important;
+}
+
+._35vwQkU {
+    margin: 0 !important;
 }
 
 /*Right(illust, user info)*/
-.sc-fzXfPG .bAzGJH {
-    margin-left: 30%;
-    margin-top: 0;
-    padding-top: 10px;
+.bAzGJH {
+    box-sizing: border-box;
+    margin-left: 20vw;
     max-height: 100vh;
+    width: 80vw;
+}
+
+.bAzGJK {
+    margin-top: 0 !important;
+    justify-content: space-between;
+}
+
+.bAzGJI {
+    margin: 0 !important;
+    max-width: initial !important;
+}
+
+.gUbsxO {
+    width: 60vw !important;
+}
+
+@media screen and (min-height: 552px) {
+    .qDUnz {
+        max-height: calc(100vh - 48px) !important;
+    }
 }
