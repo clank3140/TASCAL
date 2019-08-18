@@ -1,3 +1,50 @@
-h1{
-    color: red;
+#root {
+    display: flex;
+}
+
+/*Left Menu*/
+._2bRtL9c {
+    width: 30%;
+    padding: 30px;
+    height: 100%;
+    position: fixed;
+    display: block;
+
+    .Pz2OXOH,
+    ._35zXp-3 {
+        display: block;
+    }
+
+    ._-59EIiw {
+        font-size: 1.4rem;
+
+        li a {
+            line-height: 3rem;
+        }
+    }
+
+    ._2SUJDIY {
+        margin-left: 0;
+    }
+
+    .EzpDawq,
+    ._-59EIiw,
+    ._1hysT5B {
+        flex-direction: column;
+    }
+
+    ._21w2tl_,
+    ._3r6ZD-l {
+        -webkit-flex-flow: row;
+    }
+
+
+}
+
+/*Right(illust, user info)*/
+.sc-fzXfPG .bAzGJH {
+    margin-left: 30%;
+    margin-top: 0;
+    padding-top: 10px;
+    max-height: 100vh;
 }

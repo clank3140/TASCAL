@@ -12,9 +12,13 @@
 
     "content_scripts": [
         {
-            "matches": ["https://www.youtube.com/*","https://www.pixiv.net/*"],
+            "matches": ["https://www.youtube.com/*"],
             "css": ["style.css"],
             "js": ["jquery-3.4.1.min.js", "content_script.js"]
+        },
+        {
+            "matches": ["https://www.pixiv.net/member_illust.*"],
+            "css": ["style.css"]
         }
     ],
 
