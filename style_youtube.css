@@ -22,3 +22,7 @@ extension{
 .link_button > a.others{
     color: cadetblue;
 }
+
+.link_button > a.youtube{
+    color: #cc0000;
+}

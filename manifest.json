@@ -1,8 +1,7 @@
 {
     "manifest_version": 2,
     "name": "TAS-CAL",
-    "short_name": "Ext name",
-    "version": "1.5",
+    "version": "1.7",
     "description": "I want Tasukaru.",
     "icons": {
         "16": "icon16.png",
@@ -22,7 +21,13 @@
         }
     ],
 
+
     "browser_action": {
         "default_popup": "popup.html"
+    },
+
+    "background": {
+        "scripts": ["background_youtube.js"],
+        "persistent": false
     }
 }
