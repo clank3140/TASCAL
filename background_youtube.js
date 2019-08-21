@@ -1,8 +1,15 @@
 chrome.runtime.onMessage.addListener(
     function (request, sender, sendResponse) {
-        var api = 'https://www.googleapis.com/youtube/v3/videos?part=snippet';
+        var api;
+        var videoId;
+        if (request.includes('/watch')) {
+            api = 'https://www.googleapis.com/youtube/v3/videos?part=snippet';
+            videoId = request.replace('/watch?v=', '');
+        } else if (request.includes('/channel')) {
+            api = 'https://www.googleapis.com/youtube/v3/channels?part=snippet';
+            videoId = request.replace('https://www.youtube.com/channel/', '');
+        };
         var token = 'AIzaSyBtJqNli8wKJQE7Ozw_2lUgNlLtYQYlRNM';
-        var videoId = request.replace('https://www.youtube.com/watch?v=', '');
         api += '&key=' + token + '&id=' + videoId + '&fields=items(snippet(title))';
         console.log('API : ' + api);
         var title = new XMLHttpRequest();
