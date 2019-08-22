@@ -26,3 +26,7 @@ extension{
 .link_button > a.youtube{
     color: #cc0000;
 }
+
+.link_button > a.nico{
+    color: #272727;
+}

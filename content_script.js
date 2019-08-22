@@ -1,6 +1,6 @@
 function get_title(URL) {
     var defer = $.Deferred();
-    if (URL.includes('youtube.com')) {
+    if (URL.includes('youtube.com') || URL.includes('nicovideo')) {
         if (URL.includes('?sub_')) {
             defer.resolve([URL, 'チャンネル登録']);
         } else {
@@ -45,8 +45,8 @@ function AddLinkButton(DOM) {
             $(this).children('a').addClass('twitter');
         } else if ($(this).children('a').attr('href').includes('youtube.com')) {
             $(this).children('a').addClass('youtube');
-        } else if ($(this).children('a').attr('href').includes('/channel/')) {
-            $(this).children('a').addClass('youtube');
+        } else if ($(this).children('a').attr('href').includes('nicovideo')) {
+            $(this).children('a').addClass('nico');
         } else {
             $(this).children('a').addClass('others');
         };
@@ -58,7 +58,7 @@ $(function () {
     var place_aTag = "#description > yt-formatted-string > a";
     setTimeout(function () {
         $(place_aTag).each(function () {
-            if ($(this).attr('href').includes('https%3A%2F%2Ftwitter.com') || $(this).attr('href').includes('http%3A%2F%2Ftwitter.com')) {
+            if ($(this).attr('href').includes('https%3A%2F%2Ftwitter.com') || $(this).attr('href').includes('http%3A%2F%2Ftwitter.com') || $(this).attr('href').includes('nicovideo')) {
                 links = $(this).text();
             } else if ($(this).attr('href').includes('search_query')) {
                 links = $(this).attr('href').replace('/results?search_query=', '');
