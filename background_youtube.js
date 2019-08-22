@@ -11,6 +11,9 @@ chrome.runtime.onMessage.addListener(
             } else if (request.includes('/channel')) {
                 api = 'https://www.googleapis.com/youtube/v3/channels?part=snippet';
                 videoId = request.replace('https://www.youtube.com/channel/', '');
+            } else if (request.includes('/playlist')) {
+                api = 'https://www.googleapis.com/youtube/v3/playlists?part=snippet';
+                videoId = request.replace('https://www.youtube.com/playlist?list=', '');
             };
             api += '&key=' + token + '&id=' + videoId + '&fields=items(snippet(title))';
             console.log('API : ' + api);

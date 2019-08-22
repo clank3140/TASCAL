@@ -1,6 +1,6 @@
 function get_title(URL) {
     var defer = $.Deferred();
-    if (URL.includes('/watch') || URL.includes('/channel')) {
+    if (URL.includes('youtube.com')) {
         if (URL.includes('?sub_')) {
             defer.resolve([URL, 'チャンネル登録']);
         } else {
@@ -43,7 +43,7 @@ function AddLinkButton(DOM) {
         $(this).children('a').attr('target', '_blank');
         if ($(this).children('a').attr('href').includes('https://twitter.com')) {
             $(this).children('a').addClass('twitter');
-        } else if ($(this).children('a').attr('href').includes('/watch')) {
+        } else if ($(this).children('a').attr('href').includes('youtube.com')) {
             $(this).children('a').addClass('youtube');
         } else if ($(this).children('a').attr('href').includes('/channel/')) {
             $(this).children('a').addClass('youtube');
@@ -68,7 +68,6 @@ $(function () {
                 links = $(this).attr('href');
             };
             $.when(get_title(links)).done(function (URL_title) {
-                console.log(URL_title);
                 $("#info").before("<extension><a href=" + URL_title[0] + ">" + URL_title[1] + "</a></extension>");
                 AddLinkButton("extension");
             });
