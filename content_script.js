@@ -3,7 +3,6 @@ function get_title(URL) {
     if (URL.includes('/watch') || URL.includes('/channel')) {
         //        URL = 'https://www.youtube.com' + URL;
         chrome.runtime.sendMessage(URL, function (response) {
-            console.log('response : ' + response);
             defer.resolve([URL, response]);
         });
     } else if (URL.includes('search_query')) {
@@ -20,7 +19,11 @@ function get_title(URL) {
             defer.resolve([URL, id]);
         }
     } else {
-        defer.resolve([URL, 'others']);
+        console.log(URL);
+        URL = URL.replace('/redirect?q=','');
+        var text = decodeURI(URL);
+        console.log(text);
+        defer.resolve([URL, text]);
     }
     return defer.promise(this);
 };
@@ -56,7 +59,6 @@ $(function () {
                 links = $(this).attr('href');
             };
             $.when(get_title(links)).done(function (URL_title) {
-                console.log('links:' + URL_title[0] + 'title' + URL_title[1]);
                 $("#info").before("<extension><a href=" + URL_title[0] + ">" + URL_title[1] + "</a></extension>");
                 AddLinkButton("extension");
             });

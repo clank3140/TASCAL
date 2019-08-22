@@ -27,7 +27,7 @@
     },
 
     "background": {
-        "scripts": ["background_youtube.js"],
+        "scripts": ["jquery-3.4.1.min.js","background_youtube.js"],
         "persistent": false
     }
 }
