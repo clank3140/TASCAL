@@ -14,7 +14,7 @@ function get_title(URL) {
         title = '検索：' + title;
         defer.resolve([URL, title]);
     } else if (URL.includes('https://twitter.com') || URL.includes('http://twitter.com')) {
-        if(URL.includes('http://twitter.com')){
+        if (URL.includes('http://twitter.com')) {
             URL = URL.replace('http', 'https');
         };
         if (URL.includes('search')) {
@@ -28,8 +28,10 @@ function get_title(URL) {
         var text = URL;
         var index = text.indexOf('http');
         text = text.slice(index);
-        index = text.indexOf('\&');
-        text = text.substring(0, index);
+        if (text.includes('&')) {
+            index = text.indexOf('\&');
+            text = text.substring(0, index);
+        }
         defer.resolve([URL, decodeURIComponent(text)]);
     }
     return defer.promise(this);
