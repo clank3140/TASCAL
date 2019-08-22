@@ -1,10 +1,13 @@
 function get_title(URL) {
     var defer = $.Deferred();
     if (URL.includes('/watch') || URL.includes('/channel')) {
-        //        URL = 'https://www.youtube.com' + URL;
-        chrome.runtime.sendMessage(URL, function (response) {
-            defer.resolve([URL, response]);
-        });
+        if (URL.includes('?sub_')) {
+            defer.resolve([URL, 'チャンネル登録']);
+        } else {
+            chrome.runtime.sendMessage(URL, function (response) {
+                defer.resolve([URL, response]);
+            });
+        }
     } else if (URL.includes('search_query')) {
         URL = URL.replace('/results?search_query=', '');
         var title = decodeURI(URL);
@@ -19,11 +22,13 @@ function get_title(URL) {
             defer.resolve([URL, id]);
         }
     } else {
-        console.log(URL);
-        URL = URL.replace('/redirect?q=','');
-        var text = decodeURI(URL);
-        console.log(text);
-        defer.resolve([URL, text]);
+        var text=URL;
+        var index = text.indexOf('q=');
+        text = text.slice(index + 2);
+        index = text.indexOf('&v=');
+        text = text.substring(0, index);
+        console.log(decodeURIComponent(text));
+        defer.resolve([URL, decodeURIComponent(text)]);
     }
     return defer.promise(this);
 };
@@ -36,7 +41,7 @@ function AddLinkButton(DOM) {
             $(this).children('a').addClass('twitter');
         } else if ($(this).children('a').attr('href').includes('/watch')) {
             $(this).children('a').addClass('youtube');
-        }else if ($(this).children('a').attr('href').includes('/channel/')) {
+        } else if ($(this).children('a').attr('href').includes('/channel/')) {
             $(this).children('a').addClass('youtube');
         } else {
             $(this).children('a').addClass('others');
