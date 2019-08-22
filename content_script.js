@@ -13,7 +13,10 @@ function get_title(URL) {
         var title = decodeURI(URL);
         title = '検索：' + title;
         defer.resolve([URL, title]);
-    } else if (URL.includes('https://twitter.com')) {
+    } else if (URL.includes('https://twitter.com') || URL.includes('http://twitter.com')) {
+        if(URL.includes('http://twitter.com')){
+            URL = URL.replace('http', 'https');
+        };
         if (URL.includes('search')) {
             var tag = URL.replace('https://twitter.com/search?q=%23', '#');
             defer.resolve([URL, tag]);
@@ -22,12 +25,11 @@ function get_title(URL) {
             defer.resolve([URL, id]);
         }
     } else {
-        var text=URL;
-        var index = text.indexOf('q=');
-        text = text.slice(index + 2);
-        index = text.indexOf('&v=');
+        var text = URL;
+        var index = text.indexOf('http');
+        text = text.slice(index);
+        index = text.indexOf('\&');
         text = text.substring(0, index);
-        console.log(decodeURIComponent(text));
         defer.resolve([URL, decodeURIComponent(text)]);
     }
     return defer.promise(this);
@@ -54,7 +56,7 @@ $(function () {
     var place_aTag = "#description > yt-formatted-string > a";
     setTimeout(function () {
         $(place_aTag).each(function () {
-            if ($(this).attr('href').includes('https%3A%2F%2Ftwitter.com')) {
+            if ($(this).attr('href').includes('https%3A%2F%2Ftwitter.com') || $(this).attr('href').includes('http%3A%2F%2Ftwitter.com')) {
                 links = $(this).text();
             } else if ($(this).attr('href').includes('search_query')) {
                 links = $(this).attr('href').replace('/results?search_query=', '');
@@ -64,6 +66,7 @@ $(function () {
                 links = $(this).attr('href');
             };
             $.when(get_title(links)).done(function (URL_title) {
+                console.log(URL_title);
                 $("#info").before("<extension><a href=" + URL_title[0] + ">" + URL_title[1] + "</a></extension>");
                 AddLinkButton("extension");
             });
