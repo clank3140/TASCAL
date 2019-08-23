@@ -2,7 +2,7 @@ function get_title(URL) {
     var defer = $.Deferred();
     if (URL.includes('youtube.com') || URL.includes('nicovideo')) {
         if (URL.includes('?sub_')) {
-            URL = URL.replace('?sub_confirmation=1','');
+            URL = URL.replace('?sub_confirmation=1', '');
             chrome.runtime.sendMessage(URL, function (response) {
                 defer.resolve([URL + '?sub_confirmation=1', response + 'のチャンネル登録']);
             });
@@ -35,7 +35,9 @@ function get_title(URL) {
             index = text.indexOf('\&');
             text = text.substring(0, index);
         }
-        defer.resolve([URL, decodeURIComponent(text)]);
+        text = decodeURIComponent(text)
+        text = list_search(title_list, text);
+        defer.resolve([URL, text]);
     }
     return defer.promise(this);
 };
@@ -59,6 +61,31 @@ function AddLinkButton(DOM) {
 
 var page_url;
 
+var title_list = [
+    {
+        url: 'https://store.fuji-aoi.com/',
+        title: '富士葵オフィシャルグッズストア『葵のおみせ』'
+    },
+    {
+        url: 'https://nijisanji.ichikara.co.jp/',
+        title: 'にじさんじ公式HP'
+    }
+];
+
+function list_search(list, src) {
+    var obj = list.find(function (item) {
+        console.log(item);
+        console.log(src);
+        if (item.url === src) return true;
+    });
+    console.log(obj);
+    if (obj == undefined) {
+        return src;
+    } else {
+        return obj.title;
+    }
+};
+
 $(document.head).on('DOMSubtreeModified propertychange', function () {
     if (page_url != location.href) {
         $('extension').each(function () {
@@ -79,6 +106,7 @@ $(document.head).on('DOMSubtreeModified propertychange', function () {
                     links = $(this).attr('href');
                 };
                 $.when(get_title(links)).done(function (URL_title) {
+                    console.log(title_list);
                     $("#info").before("<extension><a href=" + URL_title[0] + ">" + URL_title[1] + "</a></extension>");
                     AddLinkButton("extension");
                 });
