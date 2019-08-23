@@ -50,6 +50,7 @@ chrome.runtime.onMessage.addListener(
             title.send();
             title.onload = function () {
                 var xml = $.parseXML(title.response);
+                console.log(title.response);
                 var videoTitle = xml.getElementsByTagName(tag)[0].textContent;
                 console.log('send : ' + videoTitle);
                 sendResponse(videoTitle);

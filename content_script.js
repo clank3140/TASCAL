@@ -22,6 +22,7 @@ function get_title(URL) {
             defer.resolve([URL, tag]);
         } else {
             var id = URL.replace('https://twitter.com/', '@');
+            id = id.replace('/', '');
             defer.resolve([URL, id]);
         }
     } else {
@@ -53,29 +54,32 @@ function AddLinkButton(DOM) {
     })
 };
 
+var page_url;
+
 $(document.head).on('DOMSubtreeModified propertychange', function () {
-    $('extension').each(function(){
-        console.log(this);
-        $(this).remove();
-        console.log('remove');
-    });
-    var links;
-    var place_aTag = "#description > yt-formatted-string > a";
-    setTimeout(function () {
-        $(place_aTag).each(function () {
-            if ($(this).attr('href').includes('https%3A%2F%2Ftwitter.com') || $(this).attr('href').includes('http%3A%2F%2Ftwitter.com') || $(this).attr('href').includes('nicovideo')) {
-                links = $(this).text();
-            } else if ($(this).attr('href').includes('search_query')) {
-                links = $(this).attr('href').replace('/results?search_query=', '');
-                links = decodeURI(links);
-                links = 'https://twitter.com/search?q=' + links;
-            } else {
-                links = $(this).attr('href');
-            };
-            $.when(get_title(links)).done(function (URL_title) {
-                $("#info").before("<extension><a href=" + URL_title[0] + ">" + URL_title[1] + "</a></extension>");
-                AddLinkButton("extension");
-            });
+    if (page_url != location.href) {
+        $('extension').each(function () {
+            $(this).remove();
         });
-    }, 2000);
+        var links;
+        var place_aTag = "#description > yt-formatted-string > a";
+        setTimeout(function () {
+            $(place_aTag).each(function () {
+                if ($(this).attr('href').includes('https%3A%2F%2Ftwitter.com') || $(this).attr('href').includes('http%3A%2F%2Ftwitter.com') || $(this).attr('href').includes('nicovideo')) {
+                    links = $(this).text();
+                } else if ($(this).attr('href').includes('search_query')) {
+                    links = $(this).attr('href').replace('/results?search_query=', '');
+                    links = decodeURI(links);
+                    links = 'https://twitter.com/search?q=' + links;
+                } else {
+                    links = $(this).attr('href');
+                };
+                $.when(get_title(links)).done(function (URL_title) {
+                    $("#info").before("<extension><a href=" + URL_title[0] + ">" + URL_title[1] + "</a></extension>");
+                    AddLinkButton("extension");
+                });
+            });
+        }, 2000);
+        page_url = location.href;
+    };
 });
