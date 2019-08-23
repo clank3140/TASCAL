@@ -1,6 +1,6 @@
 function get_title(URL) {
     var defer = $.Deferred();
-    if (URL.includes('youtube.com') || URL.includes('nicovideo')) {
+    if (URL.includes('youtube.com') || URL.includes('/watch') || URL.includes('nicovideo')) {
         if (URL.includes('?sub_')) {
             defer.resolve([URL, 'チャンネル登録']);
         } else {
@@ -44,7 +44,7 @@ function AddLinkButton(DOM) {
         $(this).children('a').attr('target', '_blank');
         if ($(this).children('a').attr('href').includes('https://twitter.com')) {
             $(this).children('a').addClass('twitter');
-        } else if ($(this).children('a').attr('href').includes('youtube.com')) {
+        } else if ($(this).children('a').attr('href').includes('youtube.com') || $(this).children('a').attr('href').includes('/watch')) {
             $(this).children('a').addClass('youtube');
         } else if ($(this).children('a').attr('href').includes('nicovideo')) {
             $(this).children('a').addClass('nico');

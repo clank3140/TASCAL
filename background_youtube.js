@@ -1,6 +1,6 @@
 chrome.runtime.onMessage.addListener(
     function (request, sender, sendResponse) {
-        if (request.includes('youtube')) {
+        if (request.includes('youtube') || request.includes('/watch')) {
             $.get('/key', function (data) {
                 var token = data;
                 console.log('token : ' + token);
@@ -17,12 +17,12 @@ chrome.runtime.onMessage.addListener(
                     videoId = request.replace('https://www.youtube.com/playlist?list=', '');
                 };
                 api += '&key=' + token + '&id=' + videoId + '&fields=items(snippet(title))';
-                console.log('API : ' + api);
                 var title = new XMLHttpRequest();
                 title.open('GET', api);
                 title.responseType = 'json';
                 title.send();
                 title.onload = function () {
+                    console.log('API : ' + api);
                     console.log(title.response);
                     var videoTitle = title.response.items[0].snippet.title;
                     console.log('send : ' + videoTitle);
