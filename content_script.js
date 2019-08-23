@@ -1,6 +1,6 @@
 function get_title(URL) {
     var defer = $.Deferred();
-    if (URL.includes('youtube.com') || URL.includes('/watch') || URL.includes('nicovideo')) {
+    if (URL.includes('youtube.com') || URL.includes('nicovideo')) {
         if (URL.includes('?sub_')) {
             defer.resolve([URL, 'チャンネル登録']);
         } else {
@@ -9,10 +9,9 @@ function get_title(URL) {
             });
         }
     } else if (URL.includes('search_query')) {
-        URL = URL.replace('/results?search_query=', '');
-        var title = decodeURI(URL);
-        title = '検索：' + title;
-        defer.resolve([URL, title]);
+        var query = URL.replace('/results?search_query=', '');
+        query = '検索：' + decodeURI(query);
+        defer.resolve([URL, query]);
     } else if (URL.includes('https://twitter.com') || URL.includes('http://twitter.com')) {
         if (URL.includes('http://twitter.com')) {
             URL = URL.replace('http', 'https');
@@ -42,14 +41,15 @@ function AddLinkButton(DOM) {
     $(DOM).each(function () {
         $(this).addClass("link_button");
         $(this).children('a').attr('target', '_blank');
-        if ($(this).children('a').attr('href').includes('https://twitter.com')) {
-            $(this).children('a').addClass('twitter');
-        } else if ($(this).children('a').attr('href').includes('youtube.com') || $(this).children('a').attr('href').includes('/watch')) {
-            $(this).children('a').addClass('youtube');
-        } else if ($(this).children('a').attr('href').includes('nicovideo')) {
-            $(this).children('a').addClass('nico');
+        var aTag = $(this).children('a');
+        if (aTag.attr('href').includes('https://twitter.com')) {
+            aTag.addClass('twitter');
+        } else if (aTag.attr('href').includes('youtube.com')) {
+            aTag.addClass('youtube');
+        } else if (aTag.attr('href').includes('nicovideo')) {
+            aTag.addClass('nico');
         } else {
-            $(this).children('a').addClass('others');
+            aTag.addClass('others');
         };
     })
 };
@@ -69,8 +69,9 @@ $(document.head).on('DOMSubtreeModified propertychange', function () {
                     links = $(this).text();
                 } else if ($(this).attr('href').includes('search_query')) {
                     links = $(this).attr('href').replace('/results?search_query=', '');
-                    links = decodeURI(links);
-                    links = 'https://twitter.com/search?q=' + links;
+                    links = 'https://twitter.com/search?q=' + decodeURI(links);
+                } else if ($(this).attr('href').includes('/watch')) {
+                    links = 'https://www.youtube.com' + $(this).attr('href');
                 } else {
                     links = $(this).attr('href');
                 };

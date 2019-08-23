@@ -1,22 +1,20 @@
 chrome.runtime.onMessage.addListener(
     function (request, sender, sendResponse) {
-        if (request.includes('youtube') || request.includes('/watch')) {
-            $.get('/key', function (data) {
-                var token = data;
-                console.log('token : ' + token);
-                var api;
+        if (request.includes('youtube')) {
+            $.get('/key', function (token) {
+                var api = 'https://www.googleapis.com/youtube/v3';
                 var videoId;
                 if (request.includes('/watch')) {
-                    api = 'https://www.googleapis.com/youtube/v3/videos?part=snippet';
-                    videoId = request.replace('/watch?v=', '');
+                    api += '/videos';
+                    videoId = request.replace('https://www.youtube.com/watch?v=', '');
                 } else if (request.includes('/channel')) {
-                    api = 'https://www.googleapis.com/youtube/v3/channels?part=snippet';
+                    api += '/channels';
                     videoId = request.replace('https://www.youtube.com/channel/', '');
                 } else if (request.includes('/playlist')) {
-                    api = 'https://www.googleapis.com/youtube/v3/playlists?part=snippet';
+                    api += '/playlists';
                     videoId = request.replace('https://www.youtube.com/playlist?list=', '');
                 };
-                api += '&key=' + token + '&id=' + videoId + '&fields=items(snippet(title))';
+                api += '?part=snippet&key=' + token + '&id=' + videoId + '&fields=items(snippet(title))';
                 var title = new XMLHttpRequest();
                 title.open('GET', api);
                 title.responseType = 'json';
@@ -44,11 +42,11 @@ chrome.runtime.onMessage.addListener(
                 tag = 'title';
             }
             api += videoId;
-            console.log('API : ' + api);
             var title = new XMLHttpRequest();
             title.open('GET', api);
             title.send();
             title.onload = function () {
+                console.log('API : ' + api);
                 var xml = $.parseXML(title.response);
                 console.log(title.response);
                 var videoTitle = xml.getElementsByTagName(tag)[0].textContent;
