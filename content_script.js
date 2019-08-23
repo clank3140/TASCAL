@@ -2,7 +2,10 @@ function get_title(URL) {
     var defer = $.Deferred();
     if (URL.includes('youtube.com') || URL.includes('nicovideo')) {
         if (URL.includes('?sub_')) {
-            defer.resolve([URL, 'チャンネル登録']);
+            URL = URL.replace('?sub_confirmation=1','');
+            chrome.runtime.sendMessage(URL, function (response) {
+                defer.resolve([URL + '?sub_confirmation=1', response + 'のチャンネル登録']);
+            });
         } else {
             chrome.runtime.sendMessage(URL, function (response) {
                 defer.resolve([URL, response]);
