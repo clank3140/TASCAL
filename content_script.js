@@ -53,7 +53,12 @@ function AddLinkButton(DOM) {
     })
 };
 
-$(function () {
+$(document.head).on('DOMSubtreeModified propertychange', function () {
+    $('extension').each(function(){
+        console.log(this);
+        $(this).remove();
+        console.log('remove');
+    });
     var links;
     var place_aTag = "#description > yt-formatted-string > a";
     setTimeout(function () {

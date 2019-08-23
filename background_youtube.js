@@ -31,8 +31,18 @@ chrome.runtime.onMessage.addListener(
             });
             return true;
         } else if (request.includes('nicovideo')) {
-            var api = 'http://ext.nicovideo.jp/api/getthumbinfo/';
-            var videoId = request.replace('http://www.nicovideo.jp/watch/', '');
+            var api;
+            var videoId;
+            var tag;
+            if (request.includes('user')) {
+                api = 'http://seiga.nicovideo.jp/api/user/info?id=';
+                videoId = request.replace('http://www.nicovideo.jp/user/', '');
+                tag = 'nickname';
+            } else {
+                api = 'http://ext.nicovideo.jp/api/getthumbinfo/';
+                videoId = request.replace('http://www.nicovideo.jp/watch/', '');
+                tag = 'title';
+            }
             api += videoId;
             console.log('API : ' + api);
             var title = new XMLHttpRequest();
@@ -40,7 +50,7 @@ chrome.runtime.onMessage.addListener(
             title.send();
             title.onload = function () {
                 var xml = $.parseXML(title.response);
-                var videoTitle = xml.getElementsByTagName('title')[0].textContent;
+                var videoTitle = xml.getElementsByTagName(tag)[0].textContent;
                 console.log('send : ' + videoTitle);
                 sendResponse(videoTitle);
             };
