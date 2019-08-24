@@ -37,5 +37,9 @@
 
     "permissions": [
     "http://ext.nicovideo.jp/", "http://seiga.nicovideo.jp/"
-  ]
+  ],
+
+    "web_accessible_resources": [
+        "/*"
+    ]
 }

@@ -61,16 +61,7 @@ function AddLinkButton(DOM) {
 
 var page_url;
 
-var title_list = [
-    {
-        url: 'https://store.fuji-aoi.com/',
-        title: '富士葵オフィシャルグッズストア『葵のおみせ』'
-    },
-    {
-        url: 'https://nijisanji.ichikara.co.jp/',
-        title: 'にじさんじ公式HP'
-    }
-];
+var title_list;
 
 function list_search(list, src) {
     var obj = list.find(function (item) {
@@ -87,7 +78,13 @@ function list_search(list, src) {
 };
 
 $(document.head).on('DOMSubtreeModified propertychange', function () {
-    console.log('page_url : '+page_url);
+    console.log('page_url : ' + page_url);
+    var place_list = chrome.extension.getURL("/list.txt");
+    $.get(place_list, function (aaa) {
+        title_list = [];
+        title_list = eval(aaa);
+        console.log(title_list);
+    });
     if (page_url != location.href) {
         $('extension').each(function () {
             $(this).remove();
