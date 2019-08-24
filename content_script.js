@@ -87,6 +87,7 @@ function list_search(list, src) {
 };
 
 $(document.head).on('DOMSubtreeModified propertychange', function () {
+    console.log('page_url : '+page_url);
     if (page_url != location.href) {
         $('extension').each(function () {
             $(this).remove();
