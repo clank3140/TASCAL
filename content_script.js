@@ -35,7 +35,7 @@ function get_title(URL) {
             index = text.indexOf('\&');
             text = text.substring(0, index);
         }
-        text = decodeURIComponent(text)
+        text = decodeURIComponent(text);
         text = list_search(title_list, text);
         defer.resolve([URL, text]);
     }
