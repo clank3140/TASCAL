@@ -16,7 +16,7 @@
             "js": ["jquery-3.4.1.min.js", "content_script.js"]
         },
         {
-            "matches": ["https://www.pixiv.net/member_illust.*"],
+            "matches": ["https://www.pixiv.net/*"],
             "css": ["style_pixiv.css"]
         },
         {

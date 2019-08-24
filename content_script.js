@@ -107,7 +107,6 @@ $(document.head).on('DOMSubtreeModified propertychange', function () {
                     links = $(this).attr('href');
                 };
                 $.when(get_title(links)).done(function (URL_title) {
-                    console.log(title_list);
                     $("#info").before("<extension><a href=" + URL_title[0] + ">" + URL_title[1] + "</a></extension>");
                     AddLinkButton("extension");
                 });
