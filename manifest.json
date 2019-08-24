@@ -18,6 +18,10 @@
         {
             "matches": ["https://www.pixiv.net/member_illust.*"],
             "css": ["style_pixiv.css"]
+        },
+        {
+            "matches": ["https://www.nicovideo.jp/*"],
+            "css": ["style_niconico.css"]
         }
     ],
 
