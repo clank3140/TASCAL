@@ -13,11 +13,12 @@
         {
             "matches": ["https://www.youtube.com/*"],
             "css": ["style_youtube.css"],
-            "js": ["jquery-3.4.1.min.js", "content_script.js"]
+            "js": ["jquery-3.4.1.min.js", "content_script_youtube.js"]
         },
         {
             "matches": ["https://www.pixiv.net/*"],
-            "css": ["style_pixiv.css"]
+            "css": ["style_pixiv.css"],
+            "js": ["jquery-3.4.1.min.js", "content_script_pixiv.js"]
         },
         {
             "matches": ["https://www.nicovideo.jp/*"],
