@@ -99,7 +99,7 @@
     font-size: 2rem;
     align-items: baseline;
     flex-flow: row-reverse wrap-reverse !important;
-    margin-top: 3rem;
+    margin-top: 5rem;
 }
 
 .jkOmkr {
@@ -107,6 +107,9 @@
     margin-right: 0 !important;
     text-align: center;
     margin-bottom: 1rem;
+    background: white;
+    border-radius: 3rem;
+    padding-bottom: 10px;
 }
 
 .jkOmkV svg {
