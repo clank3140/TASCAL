@@ -36,7 +36,7 @@ function get_title(URL) {
             text = text.substring(0, index);
         }
         text = decodeURIComponent(text);
-        text = list_search(title_list, text);
+        text = list_search(get_list(), text);
         defer.resolve([URL, text]);
     }
     return defer.promise(this);
@@ -61,15 +61,23 @@ function AddLinkButton(DOM) {
 
 var page_url;
 
-var title_list;
+function get_list() {
+    var place_list = chrome.runtime.getURL("/list.txt");
+    var title_list = [];
+    $.get(place_list, function (aaa) {
+        console.log(aaa);
+        title_list = eval(aaa);
+        console.log(title_list);
+    });
+    return title_list;
+};
+
 
 function list_search(list, src) {
+    console.log(list);
     var obj = list.find(function (item) {
-        console.log(item);
-        console.log(src);
         if (item.url === src) return true;
     });
-    console.log(obj);
     if (obj == undefined) {
         return src;
     } else {
@@ -79,12 +87,6 @@ function list_search(list, src) {
 
 $(document.head).on('DOMSubtreeModified propertychange', function () {
     console.log('page_url : ' + page_url);
-    var place_list = chrome.extension.getURL("/list.txt");
-    $.get(place_list, function (aaa) {
-        title_list = [];
-        title_list = eval(aaa);
-        console.log(title_list);
-    });
     if (page_url != location.href) {
         $('extension').each(function () {
             $(this).remove();
