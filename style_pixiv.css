@@ -79,6 +79,11 @@ div[role="presentation"] img {
     max-width: 100vw;
 }
 
+/*subete miru*/
+.subete{
+    bottom: 0 !important;
+}
+
 /*Right user info*/
 /*like button etc*/
 .jkOmkV {
