@@ -1,6 +1,6 @@
 $(function () {
     setTimeout(function () {
-        console.log($('.sc-LzNOl'));
-        $('.sc-LzNOl').insertAfter('.sc-LzNaW');
+        console.log($('.jkOmkU'));
+        $('.jkOmkU').insertAfter('.jkOmwk');
     }, 2000);
 });
