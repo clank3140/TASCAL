@@ -30,3 +30,12 @@ extension {
 .link_button>a.nico {
     color: #272727;
 }
+
+#info-contents {
+    position: fixed;
+    width: 95vw;
+    background: white;
+    z-index: 2;
+    padding: 10px;
+    box-shadow: 0px -5px 5px rgba(0, 0, 0, 0.3);
+}
