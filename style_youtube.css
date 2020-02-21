@@ -1,4 +1,4 @@
-extension{
+extension {
     display: inline-block;
 }
 
@@ -10,23 +10,23 @@ extension{
     padding: 0 5px;
 }
 
-.link_button > a {
+.link_button>a {
     text-decoration: none;
     font-weight: bold;
 }
 
-.link_button > a.twitter{
+.link_button>a.twitter {
     color: rgb(29, 161, 242);
 }
 
-.link_button > a.others{
+.link_button>a.others {
     color: cadetblue;
 }
 
-.link_button > a.youtube{
+.link_button>a.youtube {
     color: #cc0000;
 }
 
-.link_button > a.nico{
+.link_button>a.nico {
     color: #272727;
 }

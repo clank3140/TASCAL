@@ -23,8 +23,10 @@ function get_title(URL) {
             var tag = URL.replace('https://twitter.com/search?q=%23', '#');
             defer.resolve([URL, tag]);
         } else {
-            var id = URL.replace('https://twitter.com/', '@');
-            id = id.replace('/', '');
+            URL = URL.replace('https://twitter.com/', '');
+            URL = URL.replace('/', '');
+            var id = URL;
+            URL = 'https://twitter.com/' + URL;
             defer.resolve([URL, id]);
         }
     } else {
@@ -106,6 +108,7 @@ $(document.head).on('DOMSubtreeModified propertychange', function () {
                     links = $(this).attr('href');
                 };
                 $.when(get_title(links)).done(function (URL_title) {
+                    console.log(URL_title);
                     $("#info").before("<extension><a href=" + URL_title[0] + ">" + URL_title[1] + "</a></extension>");
                     AddLinkButton("extension");
                 });
