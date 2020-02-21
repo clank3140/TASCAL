@@ -17,6 +17,14 @@ extension {
 
 .link_button>a.twitter {
     color: rgb(29, 161, 242);
+    border: solid 1px;
+    border-radius: 4px;
+    padding: 5px 10px;
+}
+
+.link_button>a.twitter:hover {
+    background-color: rgb(29, 161, 242);
+    color: white;
 }
 
 .link_button>a.others {
