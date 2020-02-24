@@ -25,6 +25,10 @@ function get_title(URL) {
         } else {
             URL = URL.replace('https://twitter.com/', '');
             URL = URL.replace('/', '');
+            if (URL.includes('?')) {
+                index = URL.indexOf('?');
+                URL = URL.substring(0, index);
+            }
             var id = URL;
             URL = 'https://twitter.com/' + URL;
             defer.resolve([URL, id]);
@@ -67,7 +71,6 @@ function get_list() {
     var place_list = chrome.runtime.getURL("/list.txt");
     var title_list = [];
     $.get(place_list, function (aaa) {
-        console.log(aaa);
         title_list = eval(aaa);
         console.log(title_list);
     });

@@ -54,5 +54,18 @@ chrome.runtime.onMessage.addListener(
                 sendResponse(videoTitle);
             };
             return true;
+        } else if (request.includes('twitter')) {
+            var api = "https://api.twitter.com/1.1/users/show.json?scree_name=";
+            var screenName;
+            if (request.includes('http://twitter.com')) {
+                request = request.replace('http', 'https');
+            };
+            request = request.replace('https://twitter.com/', '');
+            screenName = request.replace('/', '');
+            api += screenName;
+            defer.resolve([URL, id]);
         }
     });
+
+
+// Twitter API
