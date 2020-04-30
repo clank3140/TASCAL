@@ -45,7 +45,7 @@ extension {
     bottom: 0px;
     width: 95vw;
     background: white;
-    z-index: 2;
+    z-index: 30000;
     padding: 10px;
     box-shadow: 0px -5px 5px rgba(0, 0, 0, 0.3);
 }
