@@ -51,5 +51,5 @@ extension {
 }
 
 #player-theater-container {
-    z-index: 3;
+    z-index: 35000;
 }
