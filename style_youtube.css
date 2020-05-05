@@ -53,3 +53,7 @@ extension {
 #player-theater-container {
     z-index: 35000;
 }
+
+paper-dialog {
+    z-index: 40000;
+}
