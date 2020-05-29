@@ -112,7 +112,9 @@ $(document.head).on('DOMSubtreeModified propertychange', function () {
                 };
                 $.when(get_title(links)).done(function (URL_title) {
                     console.log(URL_title);
-                    $("#info").before("<extension><a href=" + URL_title[0] + ">" + URL_title[1] + "</a></extension>");
+                    var insert_place = $("#top-row");
+                    console.log(insert_place);
+                    insert_place.before("<extension><a href=" + URL_title[0] + ">" + URL_title[1] + "</a></extension>");
                     AddLinkButton("extension");
                 });
             });
